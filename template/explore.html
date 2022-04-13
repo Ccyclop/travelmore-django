@@ -13,16 +13,19 @@
         <div class="card mb-5 responsive-card" id="">
             <div class="row g-0">
               <div class="col-md-5">
-                <img src="{{hotel.thumbnail.url}}" alt="...">
+                <a href="{{hotel.get_absolute_url}}"><img src="{{hotel.thumbnail.url}}"  alt="..."></a>
               </div>
               <div class="col-md-7">
                 <div class="card-body">
-                  <p class="card-text">ვარსკვლავი: {{hotel.stars}} </p>    
-                  <p class="card-text">სახელი: {{hotel.hotelName}} </p>
-                  <p class="card-text">რეგიონი: {{hotel.region}} </p>
-                  <p class="card-text">საწოლების რაოდენობა: {{hotel.bed_quantity}} </p>
-                  <p class="card-text">ფასი: {{hotel.price}} </p>
-                  <p class="card-text"><small class="text-muted">მფლობელის სახელი: {{hotel.owner.username}} </small></p>
+                  {% for _ in "x"|rjust:hotel.stars %}
+                    <i class="fas fa-star" style="color: #ffc107; margin-right: 5px"></i>
+                  {% endfor %}    
+                  <p class="card-text">Name: {{hotel.hotelName}} </p>
+                  <p class="card-text">Region: {{hotel.region}} </p>
+                  <p class="card-text">Bed Quantity: {{hotel.bed_quantity}} </p>
+                  <p class="card-text">Price: {{hotel.price}} </p>
+                  <p class="card-text"><small class="text-muted">Owner/Author: {{hotel.owner.username}} </small></p>
+                  <p class="card-text"><small class="text-muted">Posted: {{hotel.created_at}} </small></p>
                 </div>
               </div>
             </div>

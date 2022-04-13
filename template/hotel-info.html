@@ -1,24 +1,31 @@
 {% extends 'base.html' %}
+
+{% block title %}Hotel Info{% endblock title %}
+
+{% block content %}
     <main>
         <section class="cover-image-area">
-            <img src="" id="cover-image" alt="">
+            <img src="{{hotel.hotelImage.url}}" id="cover-image" alt="">
         </section>
         <section class="hotel-info">
             <div class="hotelimage d-flex flex-column align-items-center">
-                <img src="" id="hotel-image" alt="">
-                <p id="name"></p>
-                <h5 id="star-area"></h5>
+                <img src="{{hotel.thumbnail.url}}" id="hotel-image" alt="">
+                <p id="name">{{hotel.hotelName}}</p>
+                <h5 id="star-area">
+                {% for _ in "x"|rjust:hotel.stars %}
+                    <i class="fas fa-star" style="color: #ffc107; margin-right: 5px"></i>
+                {% endfor %}</h5>
             </div>
             <div class="hotel-info-content d-flex flex-column justify-content-evenly align-items-center m-auto">
                 <div class="info d-flex justify-content-around align-items-center w-100">
                     <div class="other-than-descritpion d-flex flex-column justify-content-evenly align-items-start">
-                        <p id="region"><span style="color: #ffc107;">რეგიონი:</span></p>
-                        <p id="bedQuantity"><span style="color: #ffc107;">საწოლების რაოდენობა:</span></p>
-                        <p id="price"><span style="color: #ffc107;">ფასი:</span></p>
-                        <p id="ownername"><span style="color: #ffc107;">მფლობელის სახელი:</span></p>
+                        <p id="region"><span style="color: #ffc107;">Region: </span>{{hotel.region}}</p>
+                        <p id="bedQuantity"><span style="color: #ffc107;">Bed Quantity: </span>{{hotel.bed_quantity}}</p>
+                        <p id="price"><span style="color: #ffc107;">Price:</span> {{hotel.price}}$</p>
+                        <p id="ownername"><span style="color: #ffc107;">Owner/Author:</span> {{hotel.owner}}</p>
                     </div>
                     <div class="description-area">
-                        <p id="desription"><span style="color: #ffc107;">აღწერა:</span></p>
+                        <p id="desription"><span style="color: #ffc107;">Description: </span>{{hotel.description}}</p>
                     </div>
                 </div>
             </div>
@@ -42,15 +49,6 @@
                     </button>
                   </div>
             </div>
-            <div class="btn-area d-flex flex-column align-items-center ">
-                <div class="book-info w-50 mt-5" style="display: none;">
-                    <label for="">შეიყვანეთ თარიღი (დასაწყისი)</label>
-                    <input type="date" id="startDate" class="form-control" >
-                    <label for="">შეიყვანეთ თარიღი (დასასრული)</label>
-                    <input type="date" id="endDate" class="form-control" >
-                </div>
-                <button class="btn btn-success mt-5" id="bookBtn">დაჯავშნა</button>
-            </div>
         </section>
     </main>
-
+{% endblock content %}
