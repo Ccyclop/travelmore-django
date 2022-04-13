@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Hotels{% endblock title %}
+
+{% block content %}
+<main>
+    <div class="input-place col-md-4 m-auto d-flex">
+        <input type="text" class="form-control col-md-8 border-start border-warning border-0 rounded-0" placeholder="შეიყვანეთ სასტუმროს სახელი ან რეგიონი">
+        <button class="btn btn-warning col-md-2 rounded-0"><i class="fas fa-search"></i></button>
+    </div>
+    <section class="hotel-area d-flex flex-wrap justify-content-evenly align-items-center">
+        {% for hotel in hotels_list %}
+        <div class="card mb-5 responsive-card" id="">
+            <div class="row g-0">
+              <div class="col-md-5">
+                <img src="{{hotel.thumbnail.url}}" alt="...">
+              </div>
+              <div class="col-md-7">
+                <div class="card-body">
+                  <p class="card-text">ვარსკვლავი: {{hotel.stars}} </p>    
+                  <p class="card-text">სახელი: {{hotel.hotelName}} </p>
+                  <p class="card-text">რეგიონი: {{hotel.region}} </p>
+                  <p class="card-text">საწოლების რაოდენობა: {{hotel.bed_quantity}} </p>
+                  <p class="card-text">ფასი: {{hotel.price}} </p>
+                  <p class="card-text"><small class="text-muted">მფლობელის სახელი: {{hotel.owner.username}} </small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+    </section>
+</main>
+{% endblock content %}
+
+
+
+

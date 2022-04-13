@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+    <main>
+        <section class="cover-image-area">
+            <img src="" id="cover-image" alt="">
+        </section>
+        <section class="hotel-info">
+            <div class="hotelimage d-flex flex-column align-items-center">
+                <img src="" id="hotel-image" alt="">
+                <p id="name"></p>
+                <h5 id="star-area"></h5>
+            </div>
+            <div class="hotel-info-content d-flex flex-column justify-content-evenly align-items-center m-auto">
+                <div class="info d-flex justify-content-around align-items-center w-100">
+                    <div class="other-than-descritpion d-flex flex-column justify-content-evenly align-items-start">
+                        <p id="region"><span style="color: #ffc107;">რეგიონი:</span></p>
+                        <p id="bedQuantity"><span style="color: #ffc107;">საწოლების რაოდენობა:</span></p>
+                        <p id="price"><span style="color: #ffc107;">ფასი:</span></p>
+                        <p id="ownername"><span style="color: #ffc107;">მფლობელის სახელი:</span></p>
+                    </div>
+                    <div class="description-area">
+                        <p id="desription"><span style="color: #ffc107;">აღწერა:</span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-area m-auto" style="width: 80%;">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    </div>
+                    <div class="carousel-inner">
+                      
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+            </div>
+            <div class="btn-area d-flex flex-column align-items-center ">
+                <div class="book-info w-50 mt-5" style="display: none;">
+                    <label for="">შეიყვანეთ თარიღი (დასაწყისი)</label>
+                    <input type="date" id="startDate" class="form-control" >
+                    <label for="">შეიყვანეთ თარიღი (დასასრული)</label>
+                    <input type="date" id="endDate" class="form-control" >
+                </div>
+                <button class="btn btn-success mt-5" id="bookBtn">დაჯავშნა</button>
+            </div>
+        </section>
+    </main>
+

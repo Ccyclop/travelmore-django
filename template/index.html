@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+
+{% block content %}
+    <main>
+        <section class="carousel-area mb-5">
+            <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+            </div>
+        </section>
+        <section class="for-you col-md-8 mb-5 mt-5">
+            <div class="title">
+                <h1 class="for-you-title">
+                    პოპულარული რეგიონები
+                </h1>
+            </div>
+            <div class="for-you-hotels d-flex mt-5">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-image">
+                        <img src="https://georgiantravelguide.com/storage/files/imereti-qutaisi-kutaisi-kutaisi-kutaisi.jpg"
+                        class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body news-body">
+                        <p class="card-text">იმერეთი</p>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-image">
+                        <img src="https://citytravel.ge/files/shares/destinationsimages/destinations-13313375.jpg"
+                        class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body news-body">
+                        <p class="card-text">ქვემო ქართლი</p>
+                    </div>
+                </div>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-image">
+                        <img src="https://georgiantravelguide.com/storage/files/kvariati-shavi-zghva-achara-kvariati-black-sea-adjara-1.jpg"
+                        class="card-img-top" alt="...">
+                    </div>
+                    <div class="card-body news-body">
+                        <p class="card-text">აჭარა</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <section class="most-hotels col-md-8 m-auto mt-5">
+            <div class="hotels-title">
+                <h1 class="most-hotels-title">ახალი ამბები</h1>
+            </div>
+            <div class="most-hotels-content d-flex mt-5">
+
+            </div>
+        </section>
+    </main>
+{% endblock content %}
