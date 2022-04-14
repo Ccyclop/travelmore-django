@@ -31,10 +31,10 @@
                     
                 </ul>
                 <div class="d-flex nav-reg-log col-md-4">
-                    <div class="edit d-flex">
+                    <a href='{% url 'travelmore:hotel-create' %}' class="edit d-flex">
                         <button class="btn btn-outline-success" onclick="addBtnFunction();" id="addBtn" type="submit"><i
                                 class="fas fa-edit"></i> <span class="btn-span">დაამატე შენი სასტუმრო</span></button>
-                    </div>
+                        </a>
                     <div class="user d-flex">
                         <i class="fas fa-user"></i>
                         <p class="username"></p>
@@ -71,7 +71,7 @@
             </div>
             <div class="copyright">
                 <span class="copyright-text">
-                    © Copyright: Tegi Miqautadze 2021
+                    © Copyright: Tegi Miqautadze 2022
                 </span>
             </div>
         </div>

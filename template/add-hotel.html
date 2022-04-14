@@ -1,13 +1,14 @@
 {% extends 'base.html' %}
 
-{% block title %}Add Hotel{% endblock title %}
+{% block title %}Hotel Create{% endblock title %}
 
 {% block content %}
 <body>
     <section class="reg-login-area">
         <h1>სასტუმროს ინფორმაცია</h1>
+       
         <div class="reg-login-area-box second">
-            <input type="text" class="form-control" name="" id="hName" placeholder="შეიყვანეთ სასტუმროს სახელი">
+            {% comment %} <input type="text" class="form-control" name="" id="hName" placeholder="შეიყვანეთ სასტუმროს სახელი">
             <input type="text" class="form-control" name="" id="quantity"
                 placeholder="შეიყვანეთ ოთახების რაოდენობა (თიტოეულ ოთახში)">
             <input type="text" class="form-control" name="" id="region" placeholder="შეიყვანეთ რეგიონი">
@@ -38,8 +39,14 @@
                     <textarea name="" class="form-control" id="description" cols="15" rows="15"
                         placeholder="Enter Hotel Description Here"></textarea>
                 </div>
-            </div>
-            <button type="submit" onclick="hotelCreateFunction();" class="btn btn-primary btn-width">დამატება</button>
+            </div> {% endcomment %}
+            
+            <form action=" {% url 'travelmore:hotel-create' %}" method='post' enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button type="submit" onclick="hotelCreateFunction();" class="btn btn-primary btn-width">Create</button>
+            </form>
         </div>
     </section>
 {% endblock content %}
