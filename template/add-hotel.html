@@ -7,46 +7,31 @@
     <section class="reg-login-area">
         <h1>სასტუმროს ინფორმაცია</h1>
        
-        <div class="reg-login-area-box second">
-            {% comment %} <input type="text" class="form-control" name="" id="hName" placeholder="შეიყვანეთ სასტუმროს სახელი">
-            <input type="text" class="form-control" name="" id="quantity"
-                placeholder="შეიყვანეთ ოთახების რაოდენობა (თიტოეულ ოთახში)">
-            <input type="text" class="form-control" name="" id="region" placeholder="შეიყვანეთ რეგიონი">
-            <input type="number" class="form-control" name="" id="price" min="0" placeholder="შეიყვანეთ ფასი">
-            <input type="number" class="form-control" id="starsInp" placeholder="შეიყვანეთ ვარსკვლავების რაოდენობა" max="5" min="0">
-            <div class="side-to-side">
-                <div class="file-area">
-                    <label for="hotel-image">აირჩიე სასტუმროს სურათი</label>
-                    <input type="text" class="form-control" name="hotel-image" placeholder="შიყვანეთ სასტუმროს სურათის ლინკი"
-                        id="hotelImg">
-                    <label for="cover-image">აირჩიე ფონის სურათი</label>
-                    <input type="text" class="form-control" name="cover-image" placeholder="შიყვანეთ ფონის სურათის ლინკი"
-                        id="coverImg">
-                    <label for="room-image1">აირჩიე ოთახის სურათი #1</label>
-                    <input type="text" class="form-control" name="room-image1" placeholder="შიყვანეთ ოთახის ფოტოს ლინკი"
-                        id="roomImg1">
-                    <label for="room-image2">აირჩიე ოთახის სურათი #2</label>
-                    <input type="text" class="form-control" name="room-image2" placeholder="შიყვანეთ ოთახის ფოტოს ლინკი"
-                        id="roomImg2">
-                    <label for="room-image3">აირჩიე ოთახის სურათი #3</label>
-                    <input type="text" class="form-control" name="room-image3" placeholder="შიყვანეთ ოთახის ფოტოს ლინკი"
-                        id="roomImg3">
-                    <label for="room-image4">აირჩიე ოთახის სურათი #4</label>
-                    <input type="text" class="form-control" name="room-image4" placeholder="შიყვანეთ ოთახის ფოტოს ლინკი"
-                        id="roomImg4">
-                </div>
-                <div class="text-area">
-                    <textarea name="" class="form-control" id="description" cols="15" rows="15"
-                        placeholder="Enter Hotel Description Here"></textarea>
-                </div>
-            </div> {% endcomment %}
+        
             
-            <form action=" {% url 'travelmore:hotel-create' %}" method='post' enctype="multipart/form-data">
+            <form class="reg-login-area-box second" action=" {% url 'travelmore:hotel-create' %}" method='post' enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.as_p }}
+                
+                   {{form.hotelName}}
+                   {{form.region}}
+                   <label for="" style='width: 100%; '>Price</label>
+                   {{form.price}}
+                   <label for="" style='width: 100%;'>Stars</label>
+                   {{form.stars}}
+                    <div class="side-to-side">
+                       <div class="file-area">
+                           <label for="">Thumbnail Photo</label>
+                           {{form.thumbnail}}
+                           <label for="">Hotel Cover Photo</label>
+                           {{form.hotelImage}}
+                       </div>
+                       <div class="text-area">
+                           {{form.description}}
+                       </div>
+                    </div> 
 
-                <button type="submit" onclick="hotelCreateFunction();" class="btn btn-primary btn-width">Create</button>
+                    <button type="submit" onclick="hotelCreateFunction();" class="btn btn-primary btn-width">Create</button>
+                
             </form>
-        </div>
     </section>
 {% endblock content %}
