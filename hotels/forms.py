@@ -1,12 +1,14 @@
 from django import forms
 from django.forms import ModelForm, TextInput, EmailInput, ClearableFileInput, NumberInput, Textarea
 from hotels.models import Hotel
+from django.template.defaultfilters import slugify
 
-class hotelCreateForm(forms.ModelForm):
+class hotel_Create_Form(forms.ModelForm):
 
     def save(self, owner, commit:bool = False):
         hotel = super().save(False)
         hotel.owner = owner
+        hotel.slug = slugify(hotel.hotelName)
 
         if commit:
             hotel.save()
@@ -16,7 +18,7 @@ class hotelCreateForm(forms.ModelForm):
 
     class Meta:
         model = Hotel
-        exclude = ['owner']
+        exclude = ['owner', 'slug']
         widgets = {
             'hotelName': TextInput(attrs={
                 'class': "form-control",
@@ -47,5 +49,6 @@ class hotelCreateForm(forms.ModelForm):
                 'placeholder': 'Description',
                 'cols': '10',
                 'rows': '10'
-            })
+                }),  
+                
         }

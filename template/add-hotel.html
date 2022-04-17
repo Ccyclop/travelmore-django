@@ -11,7 +11,6 @@
             
             <form class="reg-login-area-box second" action=" {% url 'travelmore:hotel-create' %}" method='post' enctype="multipart/form-data">
                 {% csrf_token %}
-                
                    {{form.hotelName}}
                    {{form.region}}
                    <label for="" style='width: 100%; '>Price</label>
