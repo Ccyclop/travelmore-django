@@ -23,7 +23,8 @@ from django.conf.urls.static import static
 app_name = 'travelmore'
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('hotels.urls'))
+    path('', include('hotels.urls')),
+    path('users/', include('users.urls'))
 ]
 
 if settings.DEBUG:

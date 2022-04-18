@@ -32,15 +32,6 @@ class hotel_create_view(View):
             raise ValidationError('Form not Valid')
         return render(request, self.template_name, {'form': form})
         
-# @login_required()
-# def hotel_delete_view(request, slug):
-#     hotel = get_object_or_404(Hotel, slug=slug)
-
-#     if request.user != hotel.owner:
-#         return redirect('travelmore:home')
-    
-#     hotel.delete()
-#     return redirect('travelmore:home')
 
 @method_decorator(login_required, name='dispatch')
 class hotel_delete(View):

@@ -35,6 +35,16 @@
                         <button class="btn btn-outline-success" id="addBtn" type="submit"><i
                                 class="fas fa-edit"></i> <span class="btn-span">დაამატე შენი სასტუმრო</span></button>
                         </a>
+                    
+                    {% if not request.user.is_authenticated %}
+                    <div class="reg-and-log-in">
+                        <a href="{% url 'users:register' %}"><button class="btn btn-outline-success" onclick="registerPageFunction();"
+                            type="submit">რეგისტრაცია</button></a>
+                        <span class="or">OR</span>
+                        <a href="{% url 'users:login' %}"><button class="btn btn-outline-success" onclick="loginPageFuncion();"
+                            type="submit">შესლა</button></a>
+                    </div>
+                    {% else %}
                     <div class="user d-flex">
                         <i class="fas fa-user"></i>
                         <p class="username">{{request.user.username}}</p>
@@ -45,14 +55,6 @@
                                 <li class="list-group-item index-list-group-item" onclick="signOut()">გასვლა</li>
                             </ul>
                         </div>
-                    </div>
-                    {% if not request.user.is_authenticated %}
-                    <div class="reg-and-log-in">
-                        <button class="btn btn-outline-success" onclick="registerPageFunction();"
-                            type="submit">რეგისტრაცია</button>
-                        <span class="or">OR</span>
-                        <button class="btn btn-outline-success" onclick="loginPageFuncion();"
-                            type="submit">შესლა</button>
                     </div>
                     {% endif %}
                 </div>

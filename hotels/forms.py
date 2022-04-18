@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import ModelForm, TextInput, EmailInput, ClearableFileInput, NumberInput, Textarea
+from django.forms import TextInput, EmailInput, ClearableFileInput, NumberInput, Textarea
 from hotels.models import Hotel
 from django.template.defaultfilters import slugify
 
