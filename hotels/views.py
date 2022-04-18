@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from django.template.defaultfilters import slugify
 
 def home_view(request):
-    return render(request, 'explore.html', {'hotels_list': Hotel.objects.all()})
+    return render(request, 'explore.html', {'hotels_list': Hotel.objects.order_by('-created_at').all()})
 
 
 def hotel_info_view(request, slug):
@@ -32,3 +32,28 @@ class hotel_create_view(View):
             raise ValidationError('Form not Valid')
         return render(request, self.template_name, {'form': form})
         
+# @login_required()
+# def hotel_delete_view(request, slug):
+#     hotel = get_object_or_404(Hotel, slug=slug)
+
+#     if request.user != hotel.owner:
+#         return redirect('travelmore:home')
+    
+#     hotel.delete()
+#     return redirect('travelmore:home')
+
+@method_decorator(login_required, name='dispatch')
+class hotel_delete(View):
+    template_name = 'delete.html'
+
+    def get(self, request, *args, **kwargs):
+        slug = self.kwargs['slug']
+        return render(request, self.template_name, {'hotel': get_object_or_404(Hotel, slug=slug)})
+    
+    def post(self, request, *args, **kwargs):
+        slug = self.kwargs['slug']
+        hotel = get_object_or_404(Hotel, slug=slug)
+        if request.user == hotel.owner:
+            hotel.delete()
+            return redirect('travelmore:home')
+    

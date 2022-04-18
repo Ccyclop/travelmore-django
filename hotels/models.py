@@ -26,3 +26,4 @@ class Hotel(models.Model):
     def get_absolute_url(self):
         return reverse("travelmore:hotel-info", kwargs={"slug": self.slug})
     
+
