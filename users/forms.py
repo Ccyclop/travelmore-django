@@ -6,7 +6,7 @@ class User_creation_form(forms.ModelForm):
 
     def save(self, commit:bool = False):
         user = super().save(False)
-
+        user.set_password(user.password)
         if commit:
             user.save()
 

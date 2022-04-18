@@ -26,7 +26,7 @@ class user_registration_view(View):
         else:
             raise ValidationError('Form Not Valid')
         return render(request, self.template_name, {'form': form})
-# paroli ar ihasheba dasafixia
+
 
 class login_view(View):
     form_class = AuthenticationForm
