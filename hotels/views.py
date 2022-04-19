@@ -47,4 +47,26 @@ class hotel_delete(View):
         if request.user == hotel.owner:
             hotel.delete()
             return redirect('travelmore:home')
+
+@method_decorator(login_required, name='dispatch')
+class hotel_modify_view(View):
+    template_name = 'edit-hotel.html'
+    form_class = hotel_Create_Form
+    
+    
+    def get(self, request, *args, **kwargs):
+        hotel = get_object_or_404(Hotel, slug=self.kwargs['slug'])
+        form = self.form_class(instance=hotel)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        hotel = get_object_or_404(Hotel, slug=self.kwargs['slug'])
+        form = self.form_class(request.POST, request.FILES, instance=hotel)
+        if request.user == hotel.owner:
+            if form.is_valid():
+                form.save(request.user, True)
+                return redirect('travelmore:hotel-info', slugify(request.POST['hotelName']))
+            else:
+                raise ValidationError('Form not Valid')
+
     

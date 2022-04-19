@@ -31,6 +31,7 @@
             <div class="buttons" style='display:flex; justify-content: space-around; align-items: center; width: min-content; margin:auto;'>
                 {% if request.user == hotel.owner %}
                     <a href="{% url 'travelmore:hotel-delete' hotel.slug %}" style='width: min-content;'><button class='btn btn-danger'>Delete</button></a>
+                    <a href="{% url 'travelmore:hotel-edit' hotel.slug %}" style='width: min-content;'><button class='btn btn-success'>Edit</button></a>
                 {% endif %}
             </div>
         </section>
