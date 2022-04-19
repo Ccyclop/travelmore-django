@@ -49,12 +49,14 @@
                         <i class="fas fa-user"></i>
                         <p class="username">{{request.user.username}}</p>
                         <div class="dropdown">
-                            <ul class="list-group index-list-group">
-                                <li class="list-group-item index-list-group-item for-id" onclick="goToUserEditPage()">
-                                    აქაუნთის ინფორმაციის შეცვლა</li>
-                                <li class="list-group-item index-list-group-item" onclick="signOut()">გასვლა</li>
-                            </ul>
-                        </div>
+                        <ul class="list-group index-list-group">
+                            <a href="{% url 'users:user-info' request.user.username%}" class="list-group-item index-list-group-item">Account Profile</a>
+                            <form method='post' action="{% url 'users:logout' %}">
+                                {% csrf_token %}
+                                <button class="list-group-item index-list-group-item">Log Out</button>
+                            </form>
+                        </ul>
+                    </div>
                     </div>
                     {% endif %}
                 </div>

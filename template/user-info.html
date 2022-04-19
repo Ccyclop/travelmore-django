@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}User Info{% endblock title %}
+
+{% block content %}
+    <main>
+        <section class="cover-image-area">
+            <img src="" id="cover-image" alt="">
+        </section>
+        <section class="hotel-info">
+            <div class="hotelimage d-flex flex-column align-items-center">
+                <img src="{{user.avatar.url}}" id="hotel-image" alt="">
+                <p id="name">{{user.username}}</p>
+            </div>
+            <div class="hotel-info-content d-flex flex-column justify-content-evenly align-items-center m-auto">
+                <div class="info d-flex justify-content-around align-items-center w-100">
+                    <div class="other-than-descritpion d-flex flex-column justify-content-evenly align-items-start">
+                        <p id="region"><span style="color: #ffc107;">Email: </span>{{user.email}}</p>
+                        <p id="price"><span style="color: #ffc107;">Name:</span> {{user.first_name}}$</p>
+                        <p id="ownername"><span style="color: #ffc107;">Last Name:</span> {{user.last_name}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons" style='display:flex; justify-content: space-around; align-items: center; width: min-content; margin:auto;'>
+                 {% if request.user == user %}
+                    <a href="{% url 'users:user-delete' user.username%}" style='width: min-content;'><button class='btn btn-danger'>Delete</button></a>
+                    <a href="{% url 'users:user-modify' user.username %}" style='width: min-content;'><button class='btn btn-success'>Edit</button></a>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+{% endblock content %}
