@@ -48,7 +48,6 @@ class login_view(View):
                 return redirect('travelmore:home')
         return render(request, self.template_name, {'form': form})
 
-@method_decorator(login_required, name='dispatch')
 class user_info_view(View):
     template_name = 'user-info.html'
 

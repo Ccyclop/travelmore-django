@@ -6,15 +6,14 @@
 <body>
     <section class="reg-login-area">
         <h1>სასტუმროს ინფორმაცია</h1>
-       
+
         
             
             <form class="reg-login-area-box second" action=" {% url 'travelmore:hotel-create' %}" method='post' enctype="multipart/form-data">
                 {% csrf_token %}
                    {{form.hotelName}}
-                   {{form.region}}
-                   <label for="" style='width: 100%; '>Price</label>
-                   {{form.price}}
+                   {{locationform.region}}
+                   {{locationform.address}}
                    <label for="" style='width: 100%;'>Stars</label>
                    {{form.stars}}
                     <div class="side-to-side">
