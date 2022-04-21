@@ -27,6 +27,8 @@ class hotel_Create_Form(forms.ModelForm):
             'stars': NumberInput(attrs={
                 'class': "form-control",
                 'placeholder': 'Stars',
+                'max':'5',
+                'min': '1'
                 }),
             'thumbnail': ClearableFileInput(attrs={
                 'class': "form-control",
@@ -99,27 +101,33 @@ class room_form(forms.ModelForm):
             }),
             'room_mass': NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Room Mass'
+                'placeholder': 'Room Mass',
+                'min': '1'
             }),
             'floor': NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Which Floor?'
+                'placeholder': 'Which Floor?',
+                'min': '1'
             }),
             'beds': NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Bed Quantity'
+                'placeholder': 'Bed Quantity',
+                'min': '1'
             }),
             'bathroom': NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Bathtoom Quantity'
+                'placeholder': 'Bathtoom Quantity',
+                'min': '1'
             }),
             'kitchen': NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Kitchen Quantity'
+                'placeholder': 'Kitchen Quantity',
+                'min': '1'
             }),
             'price': NumberInput(attrs={
                 'class': 'form-control',
-                'placeholder': 'Price'
+                'placeholder': 'Price',
+                'min': '1'
             }),
             'balcony': CheckboxInput(attrs={
                 'class': 'form-control',
@@ -145,4 +153,34 @@ class room_form(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'TV'
             }),
+        }
+
+class feedback_form(forms.ModelForm):
+
+    def save(self, user, hotel, commit:bool = False):
+        feedback = super().save(False)
+        feedback.user = user
+        feedback.hotel = hotel
+
+        if commit:
+            feedback.save()
+
+        return feedback
+
+    class Meta:
+        model = feedback
+        exclude = ['user', 'hotel']
+        widgets = {
+            'body': Textarea(attrs={
+                'class':'form-control',
+                'style':'resize: none; border: 1px solid #ad9f9f;',
+                'placeholder': 'Add Comment',
+                'rows': '4'
+            }),
+            'stars': NumberInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Rate Hotel',
+                'max':'5',
+                'min': '1'
+            })
         }

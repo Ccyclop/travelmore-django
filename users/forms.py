@@ -3,10 +3,10 @@ from django import forms
 from django.forms import TextInput, ClearableFileInput, EmailInput, PasswordInput
 
 class User_creation_form(forms.ModelForm):
-
     def save(self, commit:bool = False):
         user = super().save(False)
         user.set_password(user.password)
+
         if commit:
             user.save()
 
@@ -14,7 +14,7 @@ class User_creation_form(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username','first_name', 'last_name', 'email', 'password', 'avatar']
+        fields = ['username','first_name', 'last_name', 'email', 'password', 'avatar',]
         widgets = {
             'username': TextInput(attrs={
                 'class': 'form-control',

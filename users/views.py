@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from hotels.models import Hotel
 from users.models import User
 from users.forms import User_creation_form
 from django.contrib.auth.decorators import login_required
@@ -22,7 +23,8 @@ class user_registration_view(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(request.POST)
         if form.is_valid():
-            form.save(True)
+            print(form.data)
+            form.save(False)
             return redirect('users:login')
         else:
             raise ValidationError('Form Not Valid')
@@ -53,7 +55,8 @@ class user_info_view(View):
 
     def get(self, request, *args, **kwargs):
         user = User.objects.get(username=self.kwargs['username'])
-        return render(request, self.template_name, {'user': user})
+        hotel = Hotel.objects.filter(owner__username=self.kwargs['username'])
+        return render(request, self.template_name, {'user': user, 'hotels': hotel})
 
 @method_decorator(login_required, name='dispatch')
 class user_delete(View):

@@ -3,30 +3,66 @@
 {% block title %}User Info{% endblock title %}
 
 {% block content %}
-    <main>
-        <section class="cover-image-area">
-            <img src="" id="cover-image" alt="">
-        </section>
-        <section class="hotel-info">
-            <div class="hotelimage d-flex flex-column align-items-center">
-                <img src="{{user.avatar.url}}" id="hotel-image" alt="">
-                <p id="name">{{user.username}}</p>
-            </div>
-            <div class="hotel-info-content d-flex flex-column justify-content-evenly align-items-center m-auto">
-                <div class="info d-flex justify-content-around align-items-center w-100">
-                    <div class="other-than-descritpion d-flex flex-column justify-content-evenly align-items-start">
-                        <p id="region"><span style="color: #ffc107;">Email: </span>{{user.email}}</p>
-                        <p id="price"><span style="color: #ffc107;">Name:</span> {{user.first_name}}$</p>
-                        <p id="ownername"><span style="color: #ffc107;">Last Name:</span> {{user.last_name}}</p>
-                    </div>
+<main>
+    <section class="cover-image-area">
+        <img src="" id="cover-image" alt="">
+    </section>
+    <section class="hotel-info">
+        <div class="hotelimage d-flex flex-column align-items-center">
+            <img src="{{user.avatar.url}}" id="hotel-image" alt="">
+            <p id="name">{{user.username}}</p>
+        </div>
+        <div class="hotel-info-content d-flex flex-column justify-content-evenly align-items-center m-auto">
+            <div class="info d-flex justify-content-around align-items-center w-100">
+                <div class="other-than-descritpion d-flex flex-column justify-content-evenly align-items-start">
+                    <p id="region"><span style="color: #ffc107;">Email: </span>{{user.email}}</p>
+                    <p id="price"><span style="color: #ffc107;">Name:</span> {{user.first_name}}$</p>
+                    <p id="ownername"><span style="color: #ffc107;">Last Name:</span> {{user.last_name}}</p>
                 </div>
             </div>
-            <div class="buttons" style='display:flex; justify-content: space-around; align-items: center; width: min-content; margin:auto;'>
-                 {% if request.user == user %}
-                    <a href="{% url 'users:user-delete' user.username%}" style='width: min-content;'><button class='btn btn-danger'>Delete</button></a>
-                    <a href="{% url 'users:user-modify' user.username %}" style='width: min-content;'><button class='btn btn-success'>Edit</button></a>
-                {% endif %}
+        </div>
+        <div class="container mt-5 hotel-area" style='margin-bottom: 30px'>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-8">
+                    <div class="headings d-flex justify-content-between align-items-center mb-3">
+                        <h5>{{ hotels|length }} Hotels</h5>
+                    </div>
+                    {% for hotel in hotels %}
+                    <div class="card mb-5 responsive-card m-auto" id="">
+                        <div class="row g-0">
+                            <div class="col-md-5">
+                                <a href="{{hotel.get_absolute_url}}"><img src="{{hotel.thumbnail.url}}" alt="..."></a>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="card-body">
+                                    {% for _ in "x"|rjust:hotel.stars %}
+                                    <i class="fas fa-star" style="color: #ffc107; margin-right: 5px"></i>
+                                    {% endfor %}
+                                    <p class="card-text">Name: {{hotel.hotelName}} </p>
+                                    <p class="card-text">Region: {{hotel.region}} </p>
+                                    <p class="card-text">Price: {{hotel.price}} </p>
+                                    <p class="card-text"><small class="text-muted">Owner/Author:
+                                            {{hotel.owner.username}} </small></p>
+                                    <p class="card-text"><small class="text-muted">Posted: {{hotel.created_at}} </small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
-        </section>
-    </main>
+
+        </div>
+        <div class="buttons"
+            style='display:flex; justify-content: space-around; align-items: center; width: min-content; margin:auto;'>
+            {% if request.user == user %}
+            <a href="{% url 'users:user-delete' user.username%}" style='width: min-content;'><button
+                    class='btn btn-danger'>Delete</button></a>
+            <a href="{% url 'users:user-modify' user.username %}" style='width: min-content;'><button
+                    class='btn btn-success'>Edit</button></a>
+            {% endif %}
+        </div>
+    </section>
+</main>
 {% endblock content %}
