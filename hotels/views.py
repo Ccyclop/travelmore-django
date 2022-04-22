@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from hotels.models import Hotel, feedback, Room
-from hotels.forms import hotel_Create_Form, location_form, feedback_form
+from hotels.forms import hotel_Create_Form, location_form, feedback_form, room_form
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.views import View
@@ -101,7 +101,7 @@ class hotel_modify_view(View):
                 location_form.save(hotel, True)
                 return redirect('travelmore:hotel-info', slugify(request.POST['hotelName']))
             else:
-                raise ValidationError('Form not Valid')
+                raise ValidationError('Form Not Valid')
 
 @method_decorator(login_required, name='dispatch')
 class feedback_delete(View):
@@ -117,3 +117,60 @@ class feedback_delete(View):
             fb.delete()
             return redirect('travelmore:hotel-info', fb.hotel.slug)
     
+@method_decorator(login_required, name='dispatch')
+class feedback_edit(View):
+    template_name = 'feedback-edit.html'
+    form_class = feedback_form
+
+    def get(self, request, *args, **kwargs):
+        fb = feedback.objects.get(pk=self.kwargs['pk'])
+        form = self.form_class(instance=fb)
+        return render(request, self.template_name, {'form': form})
+    
+    def post(self, request ,*args, **kwargs):
+        fb = feedback.objects.get(pk=self.kwargs['pk'])
+        hotel = fb.hotel
+        form = self.form_class(request.POST, instance=fb)
+        if request.user == fb.user:
+            if form.is_valid():
+                fb = form.save(user=request.user, hotel=hotel, commit=True)
+                return redirect('travelmore:hotel-info', hotel.slug)
+            else:
+                raise ValidationError('Form Not Valid')
+
+@method_decorator(login_required, name='dispatch')
+class add_room(View):
+    form_class = room_form
+    template_name = 'add-room.html'
+    
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial={'key': 'value'})
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST, request.FILES)
+        hotel = Hotel.objects.get(slug=self.kwargs['slug'])
+        if form.is_valid():
+            form = form.save(hotel=hotel, commit=True)
+            return redirect('travelmore:hotel-info', self.kwargs['slug'])
+        else:
+            raise ValidationError('Form Not Valid')
+
+@method_decorator(login_required, name='dispatch')
+class delete_room(View):
+    template_name = 'hotel-info.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+        
+    def post(self, request, *args, **kwargs):
+        pk = self.kwargs['pk']
+        room = Room.objects.get(pk=pk)
+        hotel = room.hotel
+        if request.user == room.hotel.owner:
+            room.delete()
+            return redirect('travelmore:hotel-info', hotel.slug)
+
+    
+
+

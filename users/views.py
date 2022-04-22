@@ -21,10 +21,9 @@ class user_registration_view(View):
         return render(request, self.template_name, {'form': form})
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
-            print(form.data)
-            form.save(False)
+            form.save(True)
             return redirect('users:login')
         else:
             raise ValidationError('Form Not Valid')

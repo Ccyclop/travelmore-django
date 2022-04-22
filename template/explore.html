@@ -20,9 +20,12 @@
                   {% for _ in "x"|rjust:hotel.stars %}
                     <i class="fas fa-star" style="color: #ffc107; margin-right: 5px"></i>
                   {% endfor %}    
-                  <p class="card-text">Name: {{hotel.hotelName}} </p>
-                  <p class="card-text">Region: {{hotel.region}} </p>
-                  <p class="card-text">Price: {{hotel.price}} </p>
+                  <p class="card-text">Hotel: {{hotel.hotelName}} </p>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
                   <p class="card-text"><small class="text-muted">Owner/Author: {{hotel.owner.username}} </small></p>
                   <p class="card-text"><small class="text-muted">Posted: {{hotel.created_at}} </small></p>
                 </div>

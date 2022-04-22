@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Feedback Edit{% endblock title %}
+
+{% block content %}
+
+
+<main>
+    <section class="reg-login-area">
+        <div class="reg-login-area-box">
+                <form class="form" method='post'>
+                    {% csrf_token %}
+                    <h1 id="userIdPlace">Edit Feedback Info</h1>
+                    {{form.stars}}
+                    {{form.body}}
+                    <button type="submit" class="btn btn-primary" id="regBtn">Edit</button>
+                </form>
+        </div>
+    </section>
+</main>
+
+
+
+{% endblock content %}

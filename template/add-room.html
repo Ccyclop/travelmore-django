@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Room{% endblock title %}
+
+{% block content %}
+
+<section class="reg-login-area">
+
+
+    
+        
+        <form class="reg-login-area-box second" method='post' enctype="multipart/form-data" style='margin-top: 150px'>
+            {% csrf_token %}
+                <label for="" style='width: 100%;'>Room Mass</label>
+               {{form.room_mass}}
+               <label for="" style='width: 100%;'>Which Floor?</label>
+               {{form.floor}}
+               <label for="" style='width: 100%;'>Bed Quantity</label>
+               {{form.beds}}
+               <label for="" style='width: 100%;'>Bathroom Quantity</label>
+               {{form.bathroom}}
+               <label for="" style='width: 100%;'>Kitchen Quantity</label>
+               {{form.kitchen}}
+               <label for="" style='width: 100%;'>Price</label>
+               {{form.price}}
+                <div class="side-to-side">
+                   <div class="file-area">
+                       <label for="">Room Image 1 (optional)</label>
+                       {{form.room_image1}}
+                       <label for="">Room Image 2 (optional)</label>
+                       {{form.room_image2}}
+                       <label for="">Room Image 3 (optional)</label>
+                       {{form.room_image3}}
+                       <label for="">Room Image 4 (optional)</label>
+                       {{form.room_image4}}
+                   </div>
+                   <div class="text-area">
+                       <div>
+                        <label for="">Balcony?</label>
+                        {{form.balcony}}
+                       </div>
+                       <div>
+                        <label for="">Fire Extinguisher?</label>
+                        {{form.fire_extinguisher}}
+                       </div>
+                       <div>
+                        <label for="">Minibar?</label>
+                        {{form.minibar}}
+                       </div>
+                       <div>
+                        <label for="">Telephone?</label>
+                        {{form.telephone}}
+                       </div>
+                       <div>
+                        <label for="">Wifi?</label>
+                        {{form.wifi}}
+                       </div>
+                       <div>
+                        <label for="">TV?</label>
+                        {{form.tv}}
+                       </div>
+                   </div>
+                </div> 
+
+                <button type="submit" onclick="hotelCreateFunction();" class="btn btn-primary btn-width">Create</button>
+            
+        </form>
+</section>
+
+
+{% endblock content %}

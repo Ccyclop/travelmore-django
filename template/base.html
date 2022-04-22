@@ -34,22 +34,22 @@
                 <div class="d-flex nav-reg-log col-md-4">
                     <a href="{% url 'travelmore:hotel-create' %}" class="edit d-flex">
                         <button class="btn btn-outline-success" id="addBtn" type="submit"><i
-                                class="fas fa-edit"></i> <span class="btn-span">დაამატე შენი სასტუმრო</span></button>
+                                class="fas fa-edit"></i> <span class="btn-span">Add Hotel</span></button>
                         </a>
                     
                     {% if not request.user.is_authenticated %}
                     <div class="reg-and-log-in">
                         <a href="{% url 'users:register' %}"><button class="btn btn-outline-success" onclick="registerPageFunction();"
-                            type="submit">რეგისტრაცია</button></a>
+                            type="submit">Register</button></a>
                         <span class="or">OR</span>
                         <a href="{% url 'users:login' %}"><button class="btn btn-outline-success" onclick="loginPageFuncion();"
-                            type="submit">შესლა</button></a>
+                            type="submit">Log In</button></a>
                     </div>
                     {% else %}
                     <div class="user d-flex">
                         <i class="fas fa-user"></i>
                         <p class="username">{{request.user.username}}</p>
-                        <div class="dropdown">
+                        <div class="dropdownn">
                         <ul class="list-group index-list-group">
                             <a href="{% url 'users:user-info' request.user.username%}" class="list-group-item index-list-group-item">Account Profile</a>
                             <form method='post' action="{% url 'users:logout' %}">
@@ -83,7 +83,6 @@
             </div>
         </div>
     </footer>
-
 
 
 

@@ -130,27 +130,26 @@ class room_form(forms.ModelForm):
                 'min': '1'
             }),
             'balcony': CheckboxInput(attrs={
-                'class': 'form-control',
                 'placeholder': 'Balcony'
             }),
             'fire_extinguisher': CheckboxInput(attrs={
-                'class': 'form-control',
+                
                 'placeholder': 'fire_extinguisher'
             }),
             'minibar': CheckboxInput(attrs={
-                'class': 'form-control',
+                
                 'placeholder': 'Minibar'
             }),
             'telephone': CheckboxInput(attrs={
-                'class': 'form-control',
+                
                 'placeholder': 'Telephone'
             }),
             'wifi': CheckboxInput(attrs={
-                'class': 'form-control',
+                
                 'placeholder': 'Wifi'
             }),
             'tv': CheckboxInput(attrs={
-                'class': 'form-control',
+
                 'placeholder': 'TV'
             }),
         }

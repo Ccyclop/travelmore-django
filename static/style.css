@@ -240,7 +240,7 @@ nav {
     color: white;
 }
 
-.dropdown {
+.dropdownn {
     display: none;
     background-color: lightgray;
     transition-duration: 0.4s;
@@ -249,12 +249,12 @@ nav {
     right: 0px;
     height: min-content;
     width: 250px;
-    animation-name: dropdown;
+    animation-name: dropdownn;
     animation-timing-function: ease;
     animation-duration: 1s;
 }
 
-@keyframes dropdown {
+@keyframes dropdownn {
     0% {
         z-index: -1;
         background-color: transparent;
@@ -269,7 +269,7 @@ nav {
     }
 }
 
-.user:hover .dropdown {
+.user:hover .dropdownn {
     display: block;
 }
 
