@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from hotels.models import Hotel, feedback, Room
-from hotels.forms import hotel_Create_Form, location_form, feedback_form, room_form
+from hotels.forms import hotel_Create_Form, location_form, feedback_form, room_form, search_form
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
 from django.views import View
@@ -8,7 +8,19 @@ from django.utils.decorators import method_decorator
 from django.template.defaultfilters import slugify
 
 def home_view(request):
-    return render(request, 'explore.html', {'hotels_list': Hotel.objects.order_by('-created_at').all()})
+
+    if request.method == 'POST':
+        form = search_form(request.POST)
+        if form.is_valid():
+            return render(request, 'explore.html', {
+                'hotels_list': Hotel.objects.filter(slug__contains=slugify(request.POST['search'])),
+                'search': search_form(initial=request.POST)
+            })
+
+    return render(request, 'explore.html', {
+        'hotels_list': Hotel.objects.order_by('-created_at').all(),
+        'search': search_form(initial={'key': 'value'})
+    })
 
 
 class hotel_info_view(View):
@@ -171,6 +183,7 @@ class delete_room(View):
             room.delete()
             return redirect('travelmore:hotel-info', hotel.slug)
 
+    
     
 
 

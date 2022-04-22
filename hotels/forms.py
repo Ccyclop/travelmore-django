@@ -183,3 +183,9 @@ class feedback_form(forms.ModelForm):
                 'min': '1'
             })
         }
+
+class search_form(forms.Form):
+    search = forms.CharField(widget=TextInput(attrs={
+        'class': 'form-control col-md-8 border-start border-warning border-0 rounded-0',
+        'placeholder': 'Search'
+    }))
