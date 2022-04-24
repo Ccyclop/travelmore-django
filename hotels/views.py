@@ -6,20 +6,27 @@ from django.core.exceptions import ValidationError
 from django.views import View
 from django.utils.decorators import method_decorator
 from django.template.defaultfilters import slugify
+from django.core.paginator import Paginator
 
 def home_view(request):
 
     if request.method == 'POST':
         form = search_form(request.POST)
         if form.is_valid():
+            p = Paginator(Hotel.objects.filter(slug__contains=slugify(request.POST['search'])), 9)
+            page = request.GET.get('page')
+            pagination = p.get_page(page)
             return render(request, 'explore.html', {
-                'hotels_list': Hotel.objects.filter(slug__contains=slugify(request.POST['search'])),
+                'pagination': pagination,
                 'search': search_form(initial=request.POST)
             })
+    p = Paginator(Hotel.objects.all().order_by('-created_at'), 9)
+    page = request.GET.get('page')
+    pagination = p.get_page(page)
 
     return render(request, 'explore.html', {
-        'hotels_list': Hotel.objects.order_by('-created_at').all(),
-        'search': search_form(initial={'key': 'value'})
+        'search': search_form(initial={'key': 'value'}),
+        'pagination': pagination
     })
 
 
