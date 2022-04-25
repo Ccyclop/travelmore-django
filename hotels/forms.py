@@ -1,5 +1,5 @@
 from django import forms
-from django.forms import TextInput, EmailInput, ClearableFileInput, NumberInput, Textarea, CheckboxInput
+from django.forms import TextInput, EmailInput, ClearableFileInput, NumberInput, Textarea, CheckboxInput, Select
 from hotels.models import Hotel, location, Room, feedback
 from django.template.defaultfilters import slugify
 
@@ -73,10 +73,12 @@ class location_form(forms.ModelForm):
         }
 
 class room_form(forms.ModelForm):
-
-    def save(self, hotel, commit:bool = False):
+    choices = Room.choices
+    tp = forms.ChoiceField(choices=choices, widget=Select(attrs={'class':'form-control'}))
+    def save(self, hotel, booked:bool = False, commit:bool = False):
         room = super().save(False)
         room.hotel = hotel
+        room.booked = booked
 
         if commit:
             room.save()
@@ -85,7 +87,7 @@ class room_form(forms.ModelForm):
 
     class Meta:
         model = Room
-        exclude = ['hotel',]
+        exclude = ['hotel', ]
         widgets = {
             'room_image1': ClearableFileInput(attrs={
                 'class': 'form-control'
@@ -151,6 +153,10 @@ class room_form(forms.ModelForm):
             'tv': CheckboxInput(attrs={
 
                 'placeholder': 'TV'
+            }),
+            'booked': CheckboxInput(attrs={
+
+                'placeholder': 'Booked?'
             }),
         }
 

@@ -55,6 +55,13 @@ class location(models.Model):
 class Room(models.Model):
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
 
+    choices = (
+        (1, ('Normal')),
+        (2, ('Vip')),
+        (3, ('Deluxe'))
+    )
+
+    tp = models.IntegerField(choices=choices, default=1)
     room_image1 = models.ImageField(upload_to='hotels/rooms', blank=True)
     room_image2 = models.ImageField(upload_to='hotels/rooms', blank=True)
     room_image3 = models.ImageField(upload_to='hotels/rooms', blank=True)
@@ -83,6 +90,7 @@ class Room(models.Model):
     telephone = models.BooleanField(default=False)
     wifi = models.BooleanField(default=False)
     tv = models.BooleanField(default=False)
+    booked = models.BooleanField(default=False)
 
     def __str__(self):
         return self.hotel.hotelName

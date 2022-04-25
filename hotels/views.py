@@ -29,7 +29,6 @@ def home_view(request):
         'pagination': pagination
     })
 
-
 class hotel_info_view(View):
     form_class = feedback_form
     template_name = 'hotel-info.html'
@@ -190,7 +189,48 @@ class delete_room(View):
             room.delete()
             return redirect('travelmore:hotel-info', hotel.slug)
 
-    
-    
+@method_decorator(login_required, name='dispatch')
+class room_modify(View):
+    template_name = 'edit-room.html'
+    form_class = room_form
+
+    def get(self, request, *args, **kwargs):
+        room = Room.objects.get(pk=self.kwargs['pk'])
+        form = self.form_class(instance=room)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        room = Room.objects.get(pk=self.kwargs['pk'])
+        hotel = room.hotel
+        form = self.form_class(request.POST, request.FILES, instance=room)
+        if form.is_valid():
+            form.save(hotel=hotel, commit=True)
+            return redirect('travelmore:hotel-info', hotel.slug)
+        else:
+            raise ValidationError('Form Not Valid')
+
+class room_info(View):
+    template_name = 'room-info.html'
+
+    def get(self, request, *args, **kwargs):
+        room = Room.objects.get(pk=self.kwargs['pk'])
+        return render(request, self.template_name, {'room': room})
+
+@method_decorator(login_required, name='dispatch')
+class book(View):
+    template_name = 'book.html'
+    form_class = room_form
+
+    def get(self, request, *args, **kwargs):
+        room = Room.objects.get(pk=self.kwargs['pk'])
+        return render(request, self.template_name, {'room': room})
+
+    def post(self, request, *args, **kwargs):
+        room = Room.objects.get(pk=self.kwargs['pk'])
+        hotel = room.hotel
+        form = self.form_class(instance=room)
+        form.save(hotel=hotel, booked=True, commit=True)
+        return redirect('travelmore:hotel-info', room.hotel.slug)
+        
 
 

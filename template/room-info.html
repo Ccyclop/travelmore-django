@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block title %}Room Info{% endblock title %}
+
+{% block content %}
+<main>
+  <section class="cover-image-area" style='height:500px!important'>
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" style='height:100%!important'>
+        <div class="carousel-inner">
+            {% if room.room_image1.url|length > 0 %}
+            <div class="carousel-item active">
+              <img src="{{room.room_image1.url}}" style='height:500px; width: 100%;' class="d-block w-100" alt="...">
+            </div>
+            {% endif %}
+            {% if room.room_image2.url|length > 0 %}
+            <div class="carousel-item">
+              <img src="{{room.room_image2.url}}" style=' height:500px; width: 100%;' class="d-block w-100" alt="...">
+            </div>
+            {% endif %}
+            {% if room.room_image3.url|length > 0 %}
+            <div class="carousel-item">
+              <img src="{{room.room_image3.url}}" style=' height:500px; width: 100%;' class="d-block w-100" alt="...">
+            </div>
+            {% endif %}
+            {% if room.room_image4.url|length > 0 %}
+            <div class="carousel-item">
+              <img src="{{room.room_image4.url}}" style=' height:500px; width: 100%;' class="d-block w-100" alt="...">
+            </div>
+            {% endif %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+  </section>
+  <section class="hotel-info">
+    <div class="hotel-info-content d-flex flex-column justify-content-evenly align-items-center m-auto">
+        <p id="name">{% if room.tp == 1 %}<span style='color: green; font-weight: bold; font-family: Poppins, sans-serif;'>NORMAL</span>{% elif room.tp == 2 %}<span style='color: Blue; font-weight: bold; font-family: Poppins, sans-serif;'>VIP</span>{% elif room.tp == 3 %}<span style='color: Red; font-weight: bold; font-family: Poppins, sans-serif;'>DELUXE</span>{% endif %}</p>
+      <div class="info d-flex justify-content-around align-items-center w-100">
+        <div class="other-than-descritpion d-flex flex-column justify-content-evenly align-items-start">
+          <p id="region"><span style="color: #ffc107;">Price: </span>{{room.price}}</p>
+          <p id="region"><span style="color: #ffc107;">Mass: </span>{{room.room_mass}}</p>
+          <p id="ownername"><span style="color: #ffc107;">Floor: </span>{{room.floor}}</p>
+          <p id="ownername"><span style="color: #ffc107;">Floor: </span>{{room.floor}}</p>
+          <p>Beds: {{room.beds}} </p>
+          <p>Bathrooms: {{room.bathroom}}</p>
+          <p>Kitchen: {{room.kitchen}}</p>
+        </div>
+        <div class="description-area">
+            <p>Utilities:
+                {% if room.balcony %}Balcony,{% endif %}
+                {% if room.fire_extinguisher %}Fire Extinguisher,{% endif %}
+                {% if room.minibar %}Minibar,{% endif %}
+                {% if room.telephone %}Telephone,{% endif %}
+                {% if room.wifi %}Wifi,{% endif %}
+                {% if room.tv %}TV {% endif %}
+              </p>
+        </div>
+      </div>
+    </div>
+    <div class="buttons"
+      style='display:flex; justify-content: space-around; align-items: center; width: 300px; margin:auto;'>
+      {% if request.user == room.hotel.owner %}
+      <a href="{% url 'travelmore:delete-room' room.id %}" style='width: min-content;'><button
+          class='btn btn-danger'>Delete</button></a>
+      <a href="{% url 'travelmore:edit-room' room.id %}" style='width: min-content;'><button
+          class='btn btn-success'>Edit</button></a>
+          {% if not room.booked %}
+            <a href="{% url 'travelmore:book' room.id %}" style='width: max-content;'><button class='btn btn-warning'>Book</button></a>
+          {% endif %}
+      {% elif request.user.is_authenticated and not room.booked %}
+        <a href="{% url 'travelmore:book' room.id %}" style='width: max-content;'><button class='btn btn-warning'>Book</button></a>
+      {% endif %}
+    </div>
+  </section>
+</main>
+{% endblock content %}

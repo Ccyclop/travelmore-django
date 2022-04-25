@@ -1,16 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}Add Room{% endblock title %}
+{% block title %}Edit Room{% endblock title %}
 
 {% block content %}
 
 <section class="reg-login-area">
 <br>
 <br>
-<br>
-
-    
-        
+<br>  
         <form class="reg-login-area-box second" method='post' enctype="multipart/form-data" style='margin-top: 150px'>
             <br>
             {% csrf_token %}
@@ -70,7 +67,7 @@
                    </div>
                 </div> 
 
-                <button type="submit" onclick="hotelCreateFunction();" class="btn btn-primary btn-width">Create</button>
+                <button type="submit" onclick="hotelCreateFunction();" class="btn btn-primary btn-width">Edit</button>
             
         </form>
 </section>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Book Room{% endblock title %}
+
+{% block content %}
+    
+    <br>
+    <div style='width:500px; height:500px; margin:auto; margin-top:500px; border: 2px, solid, black'>
+        <h1>Book {% if room.tp == 1 %}<span style='color: green; font-weight: bold; font-family: Poppins, sans-serif;'>NORMAL</span>{% elif room.tp == 2 %}<span style='color: Blue; font-weight: bold; font-family: Poppins, sans-serif;'>VIP</span>{% elif room.tp == 3 %}<span style='color: Red; font-weight: bold; font-family: Poppins, sans-serif;'>DELUXE</span>{% endif %} Room?</h1>
+        <form action="" method='post'>
+            {% csrf_token %}
+            <div style='display: flex; justify-content: space-between; align-items: center;'>
+                <button type='submit' class='btn btn-success'>Yes</button>
+                <a href="{% url 'travelmore:hotel-info' room.hotel.slug %}" class='btn btn-danger'>No</a>
+            </div>
+        </form>
+    </div>
+    <br>
+    
+
+{% endblock content %}

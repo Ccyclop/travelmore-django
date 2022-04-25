@@ -1,4 +1,4 @@
-from hotels.views import home_view, hotel_info_view, hotel_create_view, hotel_delete, hotel_modify_view, feedback_delete, feedback_edit, add_room, delete_room
+from hotels.views import *
 from django.urls import path
 
 app_name = 'travelmore'
@@ -11,5 +11,8 @@ urlpatterns = [
     path('feedback/<int:pk>/delete/', feedback_delete.as_view(), name='feedback-delete'),
     path('feedback/<int:pk>/edit/', feedback_edit.as_view(), name='feedback-edit'),
     path('hotel/<slug:slug>/add/room', add_room.as_view(), name='add-room'),
-    path('hotel/room/<int:pk>/delete', delete_room.as_view(), name='delete-room')
+    path('hotel/room/<int:pk>/delete', delete_room.as_view(), name='delete-room'),
+    path('hotel/room/<int:pk>/edit', room_modify.as_view(), name='edit-room'),
+    path('hotel/room/<int:pk>/info', room_info.as_view(), name='room-info'),
+    path('hotel/room/<int:pk>/book', book.as_view(), name='book')
 ]

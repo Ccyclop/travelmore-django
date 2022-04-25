@@ -38,9 +38,10 @@
             <h5>{{ rooms|length }} Rooms</h5>
           </div>
           {% for room in rooms %}
-          <div class="card mb-5 responsive-card" id="">
+          <div class="card mb-5 responsive-card" id="" style='overflow: hidden; position: relative;'>
             <div class="row g-0">
               <div class="col-md-5">
+                <a href="{% url 'travelmore:room-info' room.id %}">
                 <div id="carouselExampleIndicators" style='height: 100%!important;' class="carousel slide"
                   data-ride="carousel">
                   <div class="carousel-inner" style='height: 289px;'>
@@ -65,21 +66,27 @@
                         <img src="{{room.room_image4.url}}" style='height: 290px; width: 100%;' class="d-block w-100" alt="...">
                       </div>
                       {% endif %}
-                    
-                    
+                      
+                      
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
                   </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
+                </a>
                 </div>
-              </div>
               <div class="col-md-7">
-                <div class="card-body">
+                <div class="card-body" >
+                  {% if room.booked %}
+                  <div style='position: absolute; transform: rotate(45deg); top: 50px; right: -150px; width: 500px; height: max-content; background-color: Red; box-sizing: content-box; padding: 20px;'>
+                    <h1 style='font-family: Poppins, sans-serif; font-weight: bold; color: white; margin: 0px; text-align: center;'>BOOKED</h1>
+                  </div>
+                  {% endif %}
                   {% if request.user == hotel.owner %}
                   <div class="dropdown" style="display: flex; justify-content: flex-end; height: 10px;">
                     <button class="btn btn-secondary dropdown-toggle" style="background-color: transparent!important; color: black!important; border: none!important;" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -87,10 +94,11 @@
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                       <li><form action="{% url 'travelmore:delete-room' room.id %}", method='post'> {% csrf_token %}<button class="dropdown-item btn btn-danger">Delete</button></form></li>
-                      <li><a class="dropdown-item" href="">Edit</a></li>
+                      <li><a class="dropdown-item" href="{% url 'travelmore:edit-room' room.id%}">Edit</a></li>
                     </ul>
                   </div>
                   {% endif %}
+                  <p class="card-text"> {% if room.tp == 1 %}<span style='color: green; font-weight: bold; font-family: Poppins, sans-serif;'>NORMAL</span>{% elif room.tp == 2 %}<span style='color: Blue; font-weight: bold; font-family: Poppins, sans-serif;'>VIP</span>{% elif room.tp == 3 %}<span style='color: Red; font-weight: bold; font-family: Poppins, sans-serif;'>DELUXE</span>{% endif %} </p>
                   <p class="card-text">Price: {{room.price}} </p>
                   <p class="card-text">Mass: {{room.room_mass}} </p>
                   <p class="card-text">Floor: {{room.floor}} </p>
@@ -112,6 +120,7 @@
             </div>
           </div>
           {% endfor %}
+
         </div>
       </div>
 
