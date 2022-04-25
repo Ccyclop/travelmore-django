@@ -62,10 +62,10 @@ class Room(models.Model):
     )
 
     tp = models.IntegerField(choices=choices, default=1)
-    room_image1 = models.ImageField(upload_to='hotels/rooms', blank=True)
-    room_image2 = models.ImageField(upload_to='hotels/rooms', blank=True)
-    room_image3 = models.ImageField(upload_to='hotels/rooms', blank=True)
-    room_image4 = models.ImageField(upload_to='hotels/rooms', blank=True)
+    room_image1 = models.ImageField(upload_to='hotels/rooms', blank=True, default='hotels/photos/no-image.png')
+    room_image2 = models.ImageField(upload_to='hotels/rooms', blank=True, default='hotels/photos/no-image.png')
+    room_image3 = models.ImageField(upload_to='hotels/rooms', blank=True, default='hotels/photos/no-image.png')
+    room_image4 = models.ImageField(upload_to='hotels/rooms', blank=True, default='hotels/photos/no-image.png')
     room_mass = models.IntegerField(default=0, validators=[
         MinValueValidator(0)
     ])

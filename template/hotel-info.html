@@ -177,6 +177,7 @@
         </div>
       </div>
     </div>
+    {% if request.user.is_authenticated %}
     <div class="cardd" style='position: relative;
         display: flex;
         flex-direction: column;
@@ -209,7 +210,7 @@
           </form>
         </div>
       </div>
-    </div>
+    </div>{% endif %}
     <div class="buttons"
       style='display:flex; justify-content: space-around; align-items: center; width: 300px; margin:auto;'>
       {% if request.user == hotel.owner %}
