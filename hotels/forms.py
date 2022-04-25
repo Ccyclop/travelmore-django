@@ -1,9 +1,9 @@
 from django import forms
 from django.forms import TextInput, EmailInput, ClearableFileInput, NumberInput, Textarea, CheckboxInput, Select
-from hotels.models import Hotel, location, Room, feedback
+from hotels.models import Hotel, Location, Room, Feedback
 from django.template.defaultfilters import slugify
 
-class hotel_Create_Form(forms.ModelForm):
+class HotelCreateForm(forms.ModelForm):
 
     def save(self, owner, commit:bool = False):
         hotel = super().save(False)
@@ -47,7 +47,7 @@ class hotel_Create_Form(forms.ModelForm):
                 
         }
 
-class location_form(forms.ModelForm):
+class LocationForm(forms.ModelForm):
 
     def save(self, hotel, commit:bool = False):
         location = super().save(False)
@@ -59,7 +59,7 @@ class location_form(forms.ModelForm):
         return location
 
     class Meta:
-        model = location
+        model = Location
         exclude = ['hotel',]
         widgets = {
             'region': TextInput(attrs={
@@ -72,7 +72,7 @@ class location_form(forms.ModelForm):
                 }),
         }
 
-class room_form(forms.ModelForm):
+class RoomForm(forms.ModelForm):
     choices = Room.choices
     tp = forms.ChoiceField(choices=choices, widget=Select(attrs={'class':'form-control'}))
     def save(self, hotel, booked:bool = False, commit:bool = False):
@@ -160,7 +160,7 @@ class room_form(forms.ModelForm):
             }),
         }
 
-class feedback_form(forms.ModelForm):
+class FeedbackForm(forms.ModelForm):
 
     def save(self, user, hotel, commit:bool = False):
         feedback = super().save(False)
@@ -173,7 +173,7 @@ class feedback_form(forms.ModelForm):
         return feedback
 
     class Meta:
-        model = feedback
+        model = Feedback
         exclude = ['user', 'hotel']
         widgets = {
             'body': Textarea(attrs={
@@ -190,7 +190,7 @@ class feedback_form(forms.ModelForm):
             })
         }
 
-class search_form(forms.Form):
+class SearchForm(forms.Form):
     search = forms.CharField(widget=TextInput(attrs={
         'class': 'form-control col-md-8 border-start border-warning border-0 rounded-0',
         'placeholder': 'Search'

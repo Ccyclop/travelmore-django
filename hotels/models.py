@@ -26,7 +26,7 @@ class Hotel(models.Model):
         return reverse("travelmore:hotel-info", kwargs={"slug": self.slug})
     
 
-class feedback(models.Model):
+class Feedback(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
 
@@ -43,7 +43,7 @@ class feedback(models.Model):
         return f'{self.hotel.hotelName} - {self.user.username}'
     
 
-class location(models.Model):
+class Location(models.Model):
     hotel = models.OneToOneField(Hotel, on_delete=models.CASCADE)
 
     region = models.CharField(max_length=255)
@@ -63,27 +63,15 @@ class Room(models.Model):
 
     tp = models.IntegerField(choices=choices, default=1)
     room_image1 = models.ImageField(upload_to='hotels/rooms', blank=True, default='hotels/photos/no-image.png')
-    room_image2 = models.ImageField(upload_to='hotels/rooms', blank=True, default='hotels/photos/no-image.png')
-    room_image3 = models.ImageField(upload_to='hotels/rooms', blank=True, default='hotels/photos/no-image.png')
-    room_image4 = models.ImageField(upload_to='hotels/rooms', blank=True, default='hotels/photos/no-image.png')
-    room_mass = models.IntegerField(default=0, validators=[
-        MinValueValidator(0)
-    ])
-    floor = models.IntegerField(default=1, validators=[
-        MinValueValidator(1)
-    ])
-    beds = models.IntegerField(default=0, validators=[
-        MinValueValidator(1)
-    ])
-    bathroom = models.IntegerField(default=0, validators=[
-        MinValueValidator(1)
-    ])
-    kitchen = models.IntegerField(default=0, validators=[
-        MinValueValidator(0)
-    ])
-    price = models.IntegerField(default=0, validators=[
-        MinValueValidator(0)
-    ])
+    room_image2 = models.ImageField(upload_to='hotels/rooms', blank=True)
+    room_image3 = models.ImageField(upload_to='hotels/rooms', blank=True)
+    room_image4 = models.ImageField(upload_to='hotels/rooms', blank=True)
+    room_mass = models.PositiveIntegerField(default=0)
+    floor = models.PositiveIntegerField(default=1)
+    beds = models.PositiveIntegerField(default=1)
+    bathroom = models.PositiveIntegerField(default=1)
+    kitchen = models.PositiveIntegerField(default=0)
+    price = models.PositiveIntegerField(default=0)
     balcony = models.BooleanField(default=False)
     fire_extinguisher = models.BooleanField(default=False)
     minibar = models.BooleanField(default=False)
